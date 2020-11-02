@@ -1,17 +1,17 @@
 {
-  "name": "Arkadiusz Kwasigroch",
-  "short_name": "Arkadiusz Kwasigroch",
+  "name": "Emmanuel Agbeli",
+  "short_name": "Emmanuel Agbeli",
   "lang": "en-us",
-  "theme_color": "#3f51b5",
-  "background_color": "#3f51b5",
+  "theme_color": "#324191",
+  "background_color": "#324191",
   "icons": [{
-    "src": "/images/icon_huf19dda8888b9106de6dc6f7c8ef8bbc9_17545_192x192_fill_lanczos_center_2.png",
-    "sizes": "192x192",
+    "src": "/images/Emma_Agbeli.jpg",
+    "sizes": "224x224",
     "type": "image/png"
     }, {
-    "src": "/images/icon_huf19dda8888b9106de6dc6f7c8ef8bbc9_17545_512x512_fill_lanczos_center_2.png",
+    "src": "/images/Emma_Agbeli.jpg",
     "sizes": "512x512",
-    "type": "image/png"
+    "type": "image/jpg"
      }],
   "display": "standalone",
   "start_url": "/?utm_source=web_app_manifest"
