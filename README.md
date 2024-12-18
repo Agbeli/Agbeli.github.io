@@ -1,2 +1,2 @@
 # Agbeli.github.io
-Personal info
+Personal profile 

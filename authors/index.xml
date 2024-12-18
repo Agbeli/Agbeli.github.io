@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Arkadiusz Kwasigroch</title>
+    <link>https://akwasigroch.github.io/authors/</link>
+      <atom:link href="https://akwasigroch.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Arkadiusz Kwasigroch © 2020</copyright><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://akwasigroch.github.io/images/icon_huf19dda8888b9106de6dc6f7c8ef8bbc9_17545_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>https://akwasigroch.github.io/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>https://akwasigroch.github.io/authors/agnieszka-miko%C5%82ajczyk/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/authors/agnieszka-miko%C5%82ajczyk/</guid>
+      <description>&lt;h1 id=&#34;info&#34;&gt;Info&lt;/h1&gt;
+&lt;p&gt;Agnieszka Mikołajczyk is a researcher at Gdańsk University of Technology. We work together in one team. Her research interests include machine learning, explainable AI, and image analysis.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://amikolajczyk.netlify.com/&#34;&gt;&lt;strong&gt;Click here to visit her website&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Arkadiusz Kwasigroch</title>
+      <link>https://akwasigroch.github.io/authors/arkadiusz-kwasigroch/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/authors/arkadiusz-kwasigroch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Michał Grochowski</title>
+      <link>https://akwasigroch.github.io/authors/micha%C5%82-grochowski/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/authors/micha%C5%82-grochowski/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mateusz Mikołajczyk</title>
+      <link>https://akwasigroch.github.io/authors/mateusz-miko%C5%82ajczyk/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/authors/mateusz-miko%C5%82ajczyk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bartłomiej Jarzembinski</title>
+      <link>https://akwasigroch.github.io/authors/bart%C5%82omiej-jarzembinski/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/authors/bart%C5%82omiej-jarzembinski/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://akwasigroch.github.io/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/authors/admin/</guid>
+      <description>&lt;p&gt;I am an assistant researcher in the field of deep learning at the Gdańsk University of Technology. My research interests include deep learning algorithms in the field of computer vision.  I conduct research on neural architecture search and skin lesion classification. I am also interested in self-supervised learning methods.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

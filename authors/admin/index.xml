@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arkadiusz Kwasigroch</title>
+    <link>https://akwasigroch.github.io/authors/admin/</link>
+      <atom:link href="https://akwasigroch.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <description>Arkadiusz Kwasigroch</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Arkadiusz Kwasigroch © 2020</copyright>
+    <image>
+      <url>https://akwasigroch.github.io/images/icon_huf19dda8888b9106de6dc6f7c8ef8bbc9_17545_512x512_fill_lanczos_center_2.png</url>
+      <title>Arkadiusz Kwasigroch</title>
+      <link>https://akwasigroch.github.io/authors/admin/</link>
+    </image>
+    
+  </channel>
+</rss>

@@ -1,0 +1,18 @@
+{
+  "name": "Emmanuel Agbeli",
+  "short_name": "Emmanuel Agbeli",
+  "lang": "en-us",
+  "theme_color": "#324191",
+  "background_color": "#324191",
+  "icons": [{
+    "src": "/images/Emma_Agbeli.jpg",
+    "sizes": "224x224",
+    "type": "image/png"
+    }, {
+    "src": "/images/Emma_Agbeli.jpg",
+    "sizes": "512x512",
+    "type": "image/jpg"
+     }],
+  "display": "standalone",
+  "start_url": "/?utm_source=web_app_manifest"
+}

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Emmanuel Agbeli</title>
+    <link>https://Agbeli.github.io/</link>
+      <atom:link href="https://Agbeli.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <description>Arkadiusz Kwasigroch</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Emmanuel Agbeli © 2020</copyright><lastBuildDate>Sun, 08 Mar 2020 22:38:09 +0100</lastBuildDate>
+    <image>
+      <url>https://Agbeli.github.io/images/Emma_Agbeli.jpg</url>
+      <title>Emmanuel Agbeli</title>
+      <link>https://Agbeli.github.io/</link>
+    </image>
+    
+    <item>
+      <title>Self-supervised learning with pretext invariant representations</title>
+      <link>https://akwasigroch.github.io/post/blog/pretext-invariant-representations/</link>
+      <pubDate>Sun, 08 Mar 2020 22:38:09 +0100</pubDate>
+      <guid>https://akwasigroch.github.io/post/blog/pretext-invariant-representations/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Recently, I have started to experiment with self-supervised learning techniques. In the last few months, we can see the rapid development of new methods. Moreover, self-supervised learning is reaching transfer learning performance.&lt;/p&gt;
+&lt;p&gt;This family of methods allows using of unlabeled data to increase the performance of the task (e.g. classification, detection or so on). To better understand the idea behind those algorithms visit &lt;a href=&#34;https://arxiv.org/pdf/1902.06162.pdf&#34;&gt;here&lt;/a&gt; or &lt;a href=&#34;https://github.com/jason718/awesome-self-supervised-learning&#34;&gt;here&lt;/a&gt;. Self-supervised learning is used not only in computer vision domain, here is an example of successful use of self-supervised learning in automatic speech recognition &lt;a href=&#34;https://ai.facebook.com/blog/wav2vec-state-of-the-art-speech-recognition-through-self-supervision/&#34;&gt;https://ai.facebook.com/blog/wav2vec-state-of-the-art-speech-recognition-through-self-supervision/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In this post, I focus on the paper &lt;a href=&#34;https://arxiv.org/pdf/1912.01991.pdf&#34;&gt;Self-Supervised Learning of Pretext-Invariant Representations&lt;/a&gt; by Ishan Misra, Laurens van der Maaten from Facebook.&lt;/p&gt;
+&lt;h2 id=&#34;idea&#34;&gt;Idea&lt;/h2&gt;
+&lt;p&gt;Self-supervised learning usually involves preparing a pretext task. For instance, apply rotation to the images, then train the network to predict the rotation angles. Thus, pretext task most often becomes a simple classification task. The advantage of this approach is that we do not need to have manually assigned labels. We can generate labels automatically. The pretext task training aims to obtain good quality image representations. So, after pretext task pretraining, we can train our network on a downstream task (our target task) using those representations. This approach is similar to transfer learning that also involves two stages – training on big dataset then training on a target task.&lt;/p&gt;
+&lt;p&gt;In the mentioned paper authors also perform data augmentation. However, they do not focus on the prediction of the properties of the transformation. Instead, they try to make the representation of the original image and a modified image similar. This makes sense. For example, the image of the dog should produce the same feature vector regardless of the rotation angle. This can lead to more robust computer vision algorithms.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;dog.67.jpg&#34; data-caption=&#34;These two images should produce similar representations&#34;&gt;
+&lt;img data-src=&#34;dog.67.jpg&#34; class=&#34;lazyload&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    These two images should produce similar representations
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;How to make the network produce the same representations? By proper design of the loss function.
+So the idea is to pass both the original image and modified image by the network. Then change the network parameters in the optimization process to make the representation of two images similar. It can be obtained by minimizing the distance between those two representations. Unfortunately, there is one problem. The network can learn the trivial solution, for example, return zeros for all examples. To avoid such solutions, the distance between the modified image and other images in the dataset should be maximized. This lead to the loss function of the following form:&lt;/p&gt;
+&lt;p&gt;$$ h(\mathbf v_{\mathbf I}, \mathbf v_{\mathbf I^{t}}) = \frac{\exp( \frac{s(\mathbf v_{\mathbf I}, \mathbf v_{\mathbf I^{t}})}{\tau})}{\exp( \frac{s(\mathbf v_{\mathbf I}, \mathbf v_{\mathbf I^{t}})}{\tau}) + \sum_{I^{&#39;} \in \mathcal{D}_{N}} \exp( \frac{s(\mathbf v_{\mathbf I^{t}}, \mathbf v_{\mathbf I^{&#39;}})}{\tau}) } $$&lt;/p&gt;
+&lt;p&gt;A detailed explanation of the function is provided in the paper. The numerator is a distance between the image and its modification, while the denominator is a sum of distances between the modified image and other images in the dataset. What is important, this function is similar to the softmax function. Therefore, we can use the cross-entropy loss function available in deep learning libraries.&lt;/p&gt;
+&lt;p&gt;You can notice the representations of other images in the delimiter. Obtaining those every batch could be very costly, so the authors decided to construct a representation bank that contains representations of all images in the dataset. So instead of calculating that every time we can look up the array.&lt;/p&gt;
+&lt;p&gt;The authors made an extensive analysis of many tasks. I&#39;m not going to describe this here. What is interesting, the authors managed to achieve better image detection performance using self-supervised learning instead transfer learning.&lt;/p&gt;
+&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
+&lt;p&gt;I decided to implement the algorithm in the Pytorch library. The code is available here: &lt;a href=&#34;https://github.com/akwasigroch/Pretext-Invariant-Representations&#34;&gt;https://github.com/akwasigroch/Pretext-Invariant-Representations&lt;/a&gt;. I performed initial experiments on the ISIC 2017 dataset. The dataset contains 2000 training images, 150 validation images, and 600 test images. I obtained the following results on ResNet50 network:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0.55 AUC - training from scratch (the network can&#39;t learn)&lt;/li&gt;
+&lt;li&gt;0.70 AUC - training using a self-supervised pre-trained network&lt;/li&gt;
+&lt;li&gt;0.80 AUC - training using transfer learning from a network trained on Imagenet dataset&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I did not manage to reach the performance of transfer learning. However, the results are promising, and I think an increase in the number of images (I used the same images in supervised and self-supervised training) can lead to much better results. This is especially important in medical cases where many images are not labeled, as it is time-consuming and involves the work of a skilled medical specialist.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Machine learning - probabilistic perspective</title>
+      <link>https://akwasigroch.github.io/talk/probabilistic_perspective/</link>
+      <pubDate>Sun, 08 Mar 2020 18:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/talk/probabilistic_perspective/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Self-supervised learning in computer vision</title>
+      <link>https://akwasigroch.github.io/talk/selfsupervised_ml_gdansk/</link>
+      <pubDate>Mon, 10 Feb 2020 18:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/talk/selfsupervised_ml_gdansk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learn probabilistic PCA first to better understand Variational Autoencoders</title>
+      <link>https://akwasigroch.github.io/post/blog/probabilistic-pca/</link>
+      <pubDate>Wed, 05 Feb 2020 22:38:09 +0100</pubDate>
+      <guid>https://akwasigroch.github.io/post/blog/probabilistic-pca/</guid>
+      <description>&lt;p&gt;I prepare a presentation on Variational Autoencoders to my university colleagues. I think what can help them understand the topic better. I noticed that a derivation of the loss function can  cause problems as it requires understanding and intuition of probabilistic concepts.&lt;/p&gt;
+&lt;p&gt;I think that understanding probabilistic PCA first helps to understand Variational Autoencoders faster. Probabilistic PCA is a great and simple algorithm. The big advantage of this algorithm is that all the probability distributions used in the algorithm are Gaussian distributions. So starting from the latent variable distribution $p(z)$ and distribution of observed variables conditioned on latent variable $p(x|z)$, we can easily obtain the distribution of observed variable $p(x)$, and posterior distribution $p(z|x)$. It could be obtained analytically by known equations. What&#39;s more, we can easily sample from that distribution using known libraries like Numpy or Scipy. So to gain the intuition for this algorithm, it is worth to play with the examples. From my experience, learning probabilistic PCA makes learning Variational Autoencoders much easier, because I started to &amp;ldquo;feel&amp;rdquo; the equations.&lt;/p&gt;
+&lt;p&gt;I prepared the short implementation of the probabilistic PCA method. I plan to show the code to listeners on my presentation to make the algorithm easier to understand. I hope that it also helps you. The code is available at my Github:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/akwasigroch/probabilistic_pca&#34;&gt;https://github.com/akwasigroch/probabilistic_pca&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I plan to prepare longer text on my blog concerning that method.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fundamentals of Data Science - Gdańsk</title>
+      <link>https://akwasigroch.github.io/post/courses/first_edition/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/post/courses/first_edition/</guid>
+      <description>&lt;p&gt;The data science is a hot topic now, so together with &lt;a href=&#34;http://sharktime.com/en_About.html&#34;&gt;Piotr Chlebek&lt;/a&gt; and &lt;a href=&#34;https://codeme.pl/&#34;&gt;CODE:ME&lt;/a&gt; foundation we decided to organize a data science course. The course took place on 11-12.01.2020 in Gdańsk. The number of participants was limited, and the list of participants was full long before the date of the course. This shows a huge interest in data science and machine learning. The participants represented different professions, so it was a very interesting experience to teach them. During the course, there were many interesting discussions, participants proposed interesting ideas about task solutions.&lt;/p&gt;
+&lt;p&gt;The scope of the course was very wide and the participants had an opportunity to learn the fundamentals of data science and machine learning, as well as the tools used in those areas.
+My part of the course includes the basics of data science tools and algorithms:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Anaconda and Jupyter&lt;/li&gt;
+&lt;li&gt;Numpy and Pandas&lt;/li&gt;
+&lt;li&gt;Matplotlib and Seaborn&lt;/li&gt;
+&lt;li&gt;Scikit-learn and Keras&lt;/li&gt;
+&lt;li&gt;Classification, Regression, Clusterization&lt;/li&gt;
+&lt;li&gt;Time series analysis&lt;/li&gt;
+&lt;li&gt;Neural networks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The teaching materials was based on the data gathered from &lt;a href=&#34;https://dane.gov.pl/&#34;&gt;https://dane.gov.pl/&lt;/a&gt;. The page provides great datasets that are very useful to teach the basics of data preparation, visualization and so on. Moreover, the use of these data is much more fun! For example, this is much more interesting to predict the number of passengers in public transport in the home city than analyzing the iris dataset.&lt;/p&gt;
+&lt;p&gt;Another issue tackled by the participants was the analyze of football players from the FIFA game series. We were able to train the Support Vector Regression to predict the value of the players on the transfer market based on the rate of their skills like agility, strength etc. The obtained results were quite good. The problem was also validated on neural network, that performed even better.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Neural Architecture Search for Skin Lesion Classification</title>
+      <link>https://akwasigroch.github.io/publication/neural_architecture_search_ieee/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/publication/neural_architecture_search_ieee/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep neural network architecture search using network morphism</title>
+      <link>https://akwasigroch.github.io/publication/neural_architecture_search_mmar/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/publication/neural_architecture_search_mmar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selected technical issues of deep neural networks for image classification purposes</title>
+      <link>https://akwasigroch.github.io/publication/technical_issues/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/publication/technical_issues/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diagnosis of Malignant Melanoma by Neural Network Ensemble-Based System Utilising Hand-Crafted Skin Lesion Features</title>
+      <link>https://akwasigroch.github.io/publication/diagnosis_of_malignant_melanoma/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/publication/diagnosis_of_malignant_melanoma/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep CNN based decision support system for detection and assessing the stage of diabetic retinopathy</title>
+      <link>https://akwasigroch.github.io/publication/diabetic_retinopathy/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/publication/diabetic_retinopathy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://akwasigroch.github.io/home/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://akwasigroch.github.io/home/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
