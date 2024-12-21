@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #ddd;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 20px 30px;
+            position: relative;
+            background-color: white;
+            border-radius: 8px;
+            width: 45%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 55%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 15px;
+            border-style: solid;
+        }
+
+        .timeline-item.left::after {
+            left: 100%;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        .timeline-item.right::after {
+            right: 100%;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+
+        .timeline-item p {
+            margin: 5px 0;
+        }
+
+        .timeline-item img {
+            width: 50px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item span {
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline">
+        <div class="timeline-item left">
+            <img src="/post/blog/probabilistic-pca/newlogo.png" alt="Yemaachi Biotechnology">
+            <h3>Yemaachi Biotechnology Company</h3>
+            <p>Data Scientist</p>
+            <span>March 2021 – March 2022</span>
+        </div>
+        <div class="timeline-item right">
+            <img src="logo2.png" alt="Dataware Tech Ghana">
+            <h3>Dataware Tech Ghana</h3>
+            <p>Part-time Position: ML Engineer</p>
+            <span>Oct 2020 – Feb 2021</span>
+        </div>
+        <div class="timeline-item left">
+            <img src="logo3.png" alt="ICRISAT">
+            <h3>International Crop Research Institute for the Semi-Arid Tropics (ICRISAT)</h3>
+            <p>Research Apprentice/Data Scientist</p>
+            <span>June 2019 – Sep 2019</span>
+        </div>
+        <div class="timeline-item right">
+            <img src="logo4.png" alt="Saham Insurance">
+            <h3>Saham Insurance, Kigali-Rwanda</h3>
+            <p>Data Scientist-Intern</p>
+            <span>June 2018 – Dec 2018</span>
+        </div>
+        <div class="timeline-item left">
+            <img src="logo5.png" alt="Tema Metropolitan-Ghana">
+            <h3>Local Government, Tema Metropolitan-Ghana</h3>
+            <p>IT Assistant, Intern</p>
+            <span>June 2014 – Aug 2014</span>
+        </div>
+    </div>
+</body>
+</html>
